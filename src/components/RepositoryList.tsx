@@ -3,8 +3,14 @@ import { RepositoryItem } from "./RepositoryItem";
 
 import '../styles/repositories.scss';
 
+interface Repository {
+  name: string;
+  description: string;
+  html_url: string;
+}
+
 export function RepositoryList() {
-  const [ repositories, setRepositories ] = useState([])
+  const [ repositories, setRepositories ] = useState<Repository[]>([])
 
 // use effect sem parâmetro atualiza sempre que tem um evento na pag (não recomendado)
 // use effect também não pode ter uma dependência que ele mesmo muda isso gera um infinit Loop
@@ -20,7 +26,7 @@ export function RepositoryList() {
 
       <ul>
         {repositories.map(repository => (
-          <RepositoryItem key={repository.id} repository={repository} />
+          <RepositoryItem key={repository.name} repository={repository} />
         ))}
       </ul>
     </section>
